@@ -59,9 +59,6 @@ func parsePackage(pkg *string, structure *string, write *bool, customWriter io.W
 		writeToFile = true
 	}
 
-	// get the path of the package
-	pkgdir := os.Getenv("GOPATH") + "/src/" + *pkg
-
 	// reinstall package to be sure that we are uptodate
 
 	c := exec.Command(runtime.GOROOT()+"/bin/go", []string{"install", *pkg}...)
@@ -70,6 +67,14 @@ func parsePackage(pkg *string, structure *string, write *bool, customWriter io.W
 	if err != nil {
 		return err
 	}
+
+	var gopath string
+	if paths := strings.Split(os.Getenv("GOPATH"), ":"); len(paths) != 0 {
+		gopath = paths[0]
+	}
+
+	// get the path of the package
+	pkgdir := gopath + "/src/" + *pkg
 
 	fset := token.NewFileSet()
 	var f map[string]*ast.Package

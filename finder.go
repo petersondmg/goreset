@@ -73,13 +73,13 @@ func generate(
 			writer = os.Stdout
 		}
 	} else {
-		resetFile := strings.Replace(fileName, ".go", "_reset.go", 1)
+		// targetFile := strings.Replace(fileName, ".go", "_iface.go", 1)
 		// delete if needed
-		_ = os.Remove(resetFile)
+		// _ = os.Remove(targetFile)
 
 		// writeType to a file
 		var err error
-		writer, err = os.OpenFile(resetFile, os.O_CREATE|os.O_RDWR, 0600)
+		writer, err = os.OpenFile(fileName, os.O_APPEND|os.O_RDWR, 0600)
 		if err != nil {
 			return err
 		}

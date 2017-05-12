@@ -46,9 +46,9 @@ func (f *File) Render(w io.Writer) error {
 			}
 		}
 	}
-	if _, err := fmt.Fprintf(source, "package %s\n\n", f.name); err != nil {
-		return err
-	}
+	// if _, err := fmt.Fprintf(source, "package %s\n\n", f.name); err != nil {
+	// 	return err
+	// }
 	if err := f.renderImports(source); err != nil {
 		return err
 	}
